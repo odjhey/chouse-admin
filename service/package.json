@@ -5,9 +5,10 @@
   "author": "Odee",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p . && copyfiles -u 1 src/**/*.graphql dist/",
     "prd": "NODE_ENV=production node dist/server.js",
-    "dev": "concurrently -k -n COMPILER,NODEMON -c gray,blue \"tsc -w\" \"nodemon -w dist dist/server.js\"",
+    "dev": "concurrently -k -n TYPESCOMPILE,COPYFILES,COMPILER,NODEMON -c gray,gray,gray,blue \"yarn gen-gql-types --watch\" \"chokidar './src/**/*.graphql' -c 'copyfiles -u 1 ./src/**/*.graphql dist/'\" \"tsc -w\" \"nodemon -e js,graphql -w dist dist/server.js\"",
+    "gen-gql-types": "graphql-codegen --config codegen.yml",
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -17,13 +18,18 @@
     "release:beta": "yarn happy && standard-version -p beta"
   },
   "dependencies": {
+    "@graphql-tools/load-files": "^6.0.13",
+    "@graphql-tools/merge": "^6.0.13",
     "apollo-server": "^2.15.1",
     "graphql": "^15.3.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.17.0",
     "@types/jest": "^26.0.4",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "chokidar-cli": "^2.1.0",
     "concurrently": "^5.2.0",
+    "copyfiles": "^2.3.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb-typescript": "^8.0.2",
     "eslint-config-prettier": "^6.11.0",
@@ -35,7 +41,10 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "standard-version": "^8.0.2",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "@graphql-codegen/typescript": "1.17.0",
+    "@graphql-codegen/typescript-resolvers": "1.17.0",
+    "@graphql-codegen/introspection": "1.17.0"
   },
   "husky": {
     "hooks": {
@@ -43,6 +52,8 @@
     }
   },
   "lint-staged": {
-    "./src/**/*.{js,jsx,ts,tsx}": ["yarn lint --fix-dry-run"]
+    "./src/**/*.{js,jsx,ts,tsx}": [
+      "yarn lint --fix-dry-run"
+    ]
   }
 }
