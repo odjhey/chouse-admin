@@ -35,12 +35,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "CI=true lint-staged && yarn test"
+      "pre-commit": "lint-staged && yarn test"
     }
   },
   "lint-staged": {
     "./src/**/*.{js,jsx,ts,tsx}": [
-      "yarn format",
       "yarn lint --fix-dry-run"
     ]
   }

@@ -1,12 +1,10 @@
 module.exports = {
-  extends: [
-    'prettier',
-    'airbnb-typescript/base'],
-  plugins: ["prettier"],
+  extends: ['airbnb-typescript/base', 'prettier/@typescript-eslint'],
+  plugins: ['prettier'],
   parserOptions: {
     project: './tsconfig.json',
   },
   rules: {
-    "prettier/prettier": ["error"]
-  }
-};
+    'prettier/prettier': ['error'],
+  },
+}
