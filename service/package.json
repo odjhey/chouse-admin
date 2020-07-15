@@ -1,6 +1,6 @@
 {
   "name": "service",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "author": "Odee",
   "license": "MIT",
@@ -12,8 +12,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint \"src/**/*\"",
-    "release": "standard-version",
-    "release:beta": "standard-version -p beta"
+    "happy": "yarn format && yarn lint && yarn test",
+    "release": "yarn happy && standard-version",
+    "release:beta": "yarn happy && standard-version -p beta"
   },
   "dependencies": {
     "apollo-server": "^2.15.1",
