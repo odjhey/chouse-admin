@@ -1,0 +1,47 @@
+{
+  "name": "service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Odee",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "prd": "NODE_ENV=production node dist/server.js",
+    "dev": "concurrently -k -n COMPILER,NODEMON -c gray,blue \"tsc -w\" \"nodemon -w dist dist/server.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint \"src/**/*\""
+  },
+  "dependencies": {
+    "apollo-server": "^2.15.1",
+    "graphql": "^15.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "concurrently": "^5.2.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-typescript": "^8.0.2",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "CI=true lint-staged && yarn test"
+    }
+  },
+  "lint-staged": {
+    "./src/**/*.{js,jsx,ts,tsx}": [
+      "yarn format",
+      "yarn lint --fix-dry-run"
+    ]
+  }
+}
