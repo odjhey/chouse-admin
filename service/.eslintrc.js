@@ -6,5 +6,11 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': ['error'],
+    'import/prefer-default-export': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+    ],
+    '@typescript-eslint/naming-convention': ['off'],
   },
 }

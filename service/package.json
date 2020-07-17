@@ -21,10 +21,15 @@
     "@graphql-tools/load-files": "^6.0.13",
     "@graphql-tools/merge": "^6.0.13",
     "apollo-server": "^2.15.1",
+    "clubhouse-lib": "^0.10.0",
+    "dotenv": "^8.2.0",
     "graphql": "^15.3.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.17.0",
+    "@graphql-codegen/introspection": "1.17.0",
+    "@graphql-codegen/typescript": "1.17.0",
+    "@graphql-codegen/typescript-resolvers": "1.17.0",
     "@types/jest": "^26.0.4",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "chokidar-cli": "^2.1.0",
@@ -41,10 +46,7 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "standard-version": "^8.0.2",
-    "typescript": "^3.9.6",
-    "@graphql-codegen/typescript": "1.17.0",
-    "@graphql-codegen/typescript-resolvers": "1.17.0",
-    "@graphql-codegen/introspection": "1.17.0"
+    "typescript": "^3.9.6"
   },
   "husky": {
     "hooks": {

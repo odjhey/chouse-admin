@@ -16,9 +16,22 @@ export type Book = {
   author?: Maybe<Scalars['String']>;
 };
 
+export type Task = {
+  __typename?: 'Task';
+  description?: Maybe<Scalars['String']>;
+  story_id?: Maybe<Scalars['String']>;
+  completed_at?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  complete?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   books?: Maybe<Array<Maybe<Book>>>;
+  stories?: Maybe<Scalars['String']>;
+  tasks?: Maybe<Array<Maybe<Task>>>;
 };
 
 
@@ -101,6 +114,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Book: ResolverTypeWrapper<Book>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Task: ResolverTypeWrapper<Task>;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
@@ -109,6 +123,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Book: Book;
   String: Scalars['String'];
+  Task: Task;
   Query: {};
   Boolean: Scalars['Boolean'];
 };
@@ -119,12 +134,26 @@ export type BookResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
+export type TaskResolvers<ContextType = any, ParentType extends ResolversParentTypes['Task'] = ResolversParentTypes['Task']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  story_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  completed_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  complete?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
+  stories?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  tasks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Task']>>>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Book?: BookResolvers<ContextType>;
+  Task?: TaskResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 
