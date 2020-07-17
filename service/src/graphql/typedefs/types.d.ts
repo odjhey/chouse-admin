@@ -1,6 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -29,9 +30,44 @@ export type Task = {
 
 export type Query = {
   __typename?: 'Query';
-  books?: Maybe<Array<Maybe<Book>>>;
-  stories?: Maybe<Scalars['String']>;
-  tasks?: Maybe<Array<Maybe<Task>>>;
+  Task?: Maybe<Task>;
+  allTasks?: Maybe<Array<Maybe<Task>>>;
+  _allTasksMeta?: Maybe<ListMetadata>;
+};
+
+
+export type QueryAllTasksArgs = {
+  page?: Maybe<Scalars['Int']>;
+  perPage?: Maybe<Scalars['Int']>;
+  sortField?: Maybe<Scalars['String']>;
+  sortOrder?: Maybe<Scalars['String']>;
+  filter?: Maybe<TaskFilter>;
+};
+
+
+export type Query_AllTasksMetaArgs = {
+  page?: Maybe<Scalars['Int']>;
+  perPage?: Maybe<Scalars['Int']>;
+  sortField?: Maybe<Scalars['String']>;
+  sortOrder?: Maybe<Scalars['String']>;
+  filter?: Maybe<TaskFilter>;
+};
+
+export type ListMetadata = {
+  __typename?: 'ListMetadata';
+  count: Scalars['Int'];
+};
+
+export type TaskFilter = {
+  q?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['String']>;
+  views?: Maybe<Scalars['Int']>;
+  views_lt?: Maybe<Scalars['Int']>;
+  views_lte?: Maybe<Scalars['Int']>;
+  views_gt?: Maybe<Scalars['Int']>;
+  views_gte?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['ID']>;
 };
 
 
@@ -116,6 +152,10 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Task: ResolverTypeWrapper<Task>;
   Query: ResolverTypeWrapper<{}>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  ListMetadata: ResolverTypeWrapper<ListMetadata>;
+  TaskFilter: TaskFilter;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -125,6 +165,10 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   Task: Task;
   Query: {};
+  Int: Scalars['Int'];
+  ListMetadata: ListMetadata;
+  TaskFilter: TaskFilter;
+  ID: Scalars['ID'];
   Boolean: Scalars['Boolean'];
 };
 
@@ -146,15 +190,21 @@ export type TaskResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
-  stories?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  tasks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Task']>>>, ParentType, ContextType>;
+  Task?: Resolver<Maybe<ResolversTypes['Task']>, ParentType, ContextType>;
+  allTasks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Task']>>>, ParentType, ContextType, RequireFields<QueryAllTasksArgs, never>>;
+  _allTasksMeta?: Resolver<Maybe<ResolversTypes['ListMetadata']>, ParentType, ContextType, RequireFields<Query_AllTasksMetaArgs, never>>;
+};
+
+export type ListMetadataResolvers<ContextType = any, ParentType extends ResolversParentTypes['ListMetadata'] = ResolversParentTypes['ListMetadata']> = {
+  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Book?: BookResolvers<ContextType>;
   Task?: TaskResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  ListMetadata?: ListMetadataResolvers<ContextType>;
 };
 
 

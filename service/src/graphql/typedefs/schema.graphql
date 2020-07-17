@@ -21,7 +21,34 @@ type Task {
 # clients can execute, along with the return type for each. In this
 # case, the "books" query returns an array of zero or more Books (defined above).
 type Query {
-  books: [Book]
-  stories: String
-  tasks: [Task]
+  Task: Task
+  allTasks(
+    page: Int
+    perPage: Int
+    sortField: String
+    sortOrder: String
+    filter: TaskFilter
+  ): [Task]
+  _allTasksMeta(
+    page: Int
+    perPage: Int
+    sortField: String
+    sortOrder: String
+    filter: TaskFilter
+  ): ListMetadata
+}
+
+type ListMetadata {
+  count: Int!
+}
+input TaskFilter {
+  q: String
+  id: ID
+  title: String
+  views: Int
+  views_lt: Int
+  views_lte: Int
+  views_gt: Int
+  views_gte: Int
+  user_id: ID
 }
