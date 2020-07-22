@@ -1,0 +1,32 @@
+{
+  "name": "with-typescript",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc",
+    "scaffold": "yarn mst-gql --format ts --roots Task http://localhost:4000/graphql"
+  },
+  "dependencies": {
+    "graphql-request": "^2.0.0",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.2.2",
+    "mobx-state-tree": "^3.17.2",
+    "mst-gql": "^0.12.0",
+    "next": "latest",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-json-view": "^1.19.1",
+    "react-router-dom": "^5.2.0",
+    "react-table": "^7.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-table": "^7.0.19",
+    "typescript": "3.7.3"
+  },
+  "license": "ISC"
+}
