@@ -11,12 +11,6 @@ export type Scalars = {
   Float: number;
 };
 
-export type Book = {
-  __typename?: 'Book';
-  title?: Maybe<Scalars['String']>;
-  author?: Maybe<Scalars['String']>;
-};
-
 export type Task = {
   __typename?: 'Task';
   description?: Maybe<Scalars['String']>;
@@ -149,9 +143,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Book: ResolverTypeWrapper<Book>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Task: ResolverTypeWrapper<Task>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   ListMetadata: ResolverTypeWrapper<ListMetadata>;
@@ -162,21 +155,14 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Book: Book;
-  String: Scalars['String'];
   Task: Task;
+  String: Scalars['String'];
   Query: {};
   Int: Scalars['Int'];
   ListMetadata: ListMetadata;
   TaskFilter: TaskFilter;
   ID: Scalars['ID'];
   Boolean: Scalars['Boolean'];
-};
-
-export type BookResolvers<ContextType = any, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = {
-  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  author?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type TaskResolvers<ContextType = any, ParentType extends ResolversParentTypes['Task'] = ResolversParentTypes['Task']> = {
@@ -203,7 +189,6 @@ export type ListMetadataResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type Resolvers<ContextType = any> = {
-  Book?: BookResolvers<ContextType>;
   Task?: TaskResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   ListMetadata?: ListMetadataResolvers<ContextType>;
