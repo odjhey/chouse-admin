@@ -4,6 +4,7 @@ import {
   useSortBy,
   useAsyncDebounce,
   useGlobalFilter,
+  useFilters,
 } from "react-table";
 
 const GlobalFilterComponent = ({
@@ -36,8 +37,39 @@ const GlobalFilterComponent = ({
   );
 };
 
+const ColumnFilter = ({ column: { filterValue, setFilter, filter } }) => {
+  return (
+    <input
+      value={filterValue || ""}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search ${filter ? filter : ""}...`}
+    />
+  );
+};
+
 const Table = (props: { columns: any; data: any }) => {
   const { columns, data } = props;
+
+  // functions to run when a column is filtered depending on the type
+  const filterTypes = {
+    text: (rows, id, filterValue) => {
+      return rows.filter((row) => {
+        const rowValue = row.values[id];
+        return rowValue !== undefined
+          ? String(rowValue)
+              .toLowerCase()
+              .startsWith(String(filterValue).toLowerCase())
+          : true;
+      });
+    },
+  };
+  const defaultColumn = {
+    // Let's set up our default Filter UI
+    Filter: ColumnFilter,
+  };
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -55,8 +87,12 @@ const Table = (props: { columns: any; data: any }) => {
     {
       columns,
       data,
+      //@ts-ignore
+      defaultColumn,
+      filterTypes,
     },
     useGlobalFilter,
+    useFilters,
     useSortBy
   );
 
@@ -65,18 +101,27 @@ const Table = (props: { columns: any; data: any }) => {
       <thead>
         {headerGroups.map((hg) => (
           <tr {...hg.getHeaderGroupProps()}>
-            {hg.headers.map((col) => (
+            {hg.headers.map((col, idx) => {
               //@ts-ignore
-              <th {...col.getHeaderProps(col.getSortByToggleProps())}>
-                {col.render("Header")}
-                <span>
-                  {
-                    //@ts-ignore
-                    col.isSorted ? (col.isSortedDesc ? "▾" : "▴") : ""
-                  }
-                </span>
-              </th>
-            ))}
+              const { canFilter, render } = col;
+
+              return (
+                <th key={`th-${idx}`}>
+                  {/* 
+                     // @ts-ignore */}
+                  <div {...col.getHeaderProps(col.getSortByToggleProps())}>
+                    {render("Header")}
+                    <span>
+                      {
+                        //@ts-ignore
+                        col.isSorted ? (col.isSortedDesc ? "▾" : "▴") : ""
+                      }
+                    </span>
+                  </div>
+                  <div>{canFilter ? render("Filter") : null}</div>
+                </th>
+              );
+            })}
           </tr>
         ))}
         <tr>

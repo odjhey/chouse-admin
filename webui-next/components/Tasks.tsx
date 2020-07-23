@@ -27,10 +27,35 @@ const TasksList = () => {
           {
             Header: "Complete",
             accessor: "complete",
+            Filter: ({ column: { filterValue, setFilter, filter } }) => {
+              return (
+                <input
+                  value={filterValue || ""}
+                  onChange={(e) => {
+                    setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+                  }}
+                  placeholder={`Search ${filter ? filter : ""}...`}
+                />
+              );
+            },
           },
+          { Header: "Date Completed", accessor: "completed_at" },
+          { Header: "Owners", accessor: "owners" },
           {
-            Header: "Date Completed",
-            accessor: "completed_at",
+            Header: "Date updated",
+            accessor: "updated_at",
+            Filter: ({ column: { filterValue, setFilter, filter } }) => {
+              return (
+                <input
+                  type={"date"}
+                  value={filterValue || ""}
+                  onChange={(e) => {
+                    setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+                  }}
+                  placeholder={`Search ${filter ? filter : ""}...`}
+                />
+              );
+            },
           },
         ],
       },
