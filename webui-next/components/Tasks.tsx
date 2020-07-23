@@ -4,7 +4,7 @@ import { useQuery } from "./../src/models";
 import { observer } from "mobx-react";
 
 const TasksList = () => {
-  const { store, loading, error } = useQuery((store) =>
+  const { store, loading, error, setQuery } = useQuery((store) =>
     store.queryAllTasks({})
   );
   const columns = useMemo(
@@ -63,16 +63,17 @@ const TasksList = () => {
     []
   );
 
-  if (store.vTasks().length > 0) {
-    return <Table columns={columns} data={store.vTasks()}></Table>;
-  }
-
   if (loading) {
     return <h1>Loading.</h1>;
   }
   if (error) {
     return <h1>Error fetching data, please try again in a few mins.</h1>;
   }
+
+  if (store.vTasks().length > 0) {
+    return <Table columns={columns} data={store.vTasks()}></Table>;
+  }
+
   return <h1>So much empty.</h1>;
 };
 
