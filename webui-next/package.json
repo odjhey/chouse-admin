@@ -9,6 +9,10 @@
     "scaffold": "yarn mst-gql --format ts --roots Task http://localhost:4000/graphql"
   },
   "dependencies": {
+    "@apollo/client": "^3.0.2",
+    "@apollo/react-hooks": "^4.0.0",
+    "@apollo/react-ssr": "^4.0.0",
+    "apollo-link-http": "^1.5.17",
     "graphql-request": "^2.0.0",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",

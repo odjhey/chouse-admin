@@ -1,19 +1,17 @@
 import React from "react";
-import { RootStore, StoreContext } from "../src/models";
-import { createHttpClient } from "mst-gql";
-
-const rootStore = RootStore.create(undefined, {
-  gqlHttpClient: createHttpClient("http://localhost:4000/graphql"),
-});
+import { StoreContext } from "../src/models";
+import { useStore } from "../lib/store";
 
 // @ts-ignore
 export default function App({ Component, pageProps }) {
+  const store = useStore(pageProps.initialState);
+  if (typeof window !== "undefined") {
+    // @ts-ignore
+    window.store = store;
+  }
   return (
-    <StoreContext.Provider value={rootStore}>
+    <StoreContext.Provider value={store}>
       <Component {...pageProps} />
     </StoreContext.Provider>
   );
 }
-
-// @ts-ignore
-//window.store = rootStore;
