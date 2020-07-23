@@ -47,7 +47,6 @@ const resolvers = {
       const tasks = stories
         .flatMap((s: any) => s.tasks)
         .map((t) => {
-          console.log('task', t)
           return {
             ...t,
             owners: t.owner_ids
@@ -63,7 +62,6 @@ const resolvers = {
         const filteredTasks = tasks.filter((t: any) =>
           t.description.includes(args.filter.q),
         )
-        console.log('f', filteredTasks)
         return filteredTasks
       }
 

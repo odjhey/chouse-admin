@@ -6,12 +6,18 @@ let storyCache: {
   lastUpdate: any
   values: any
 } = {
-  lastUpdate: Date.now(),
+  lastUpdate: null,
   values: [],
 }
 
 const getTasksAsync = async (skipCache = false) => {
-  if (!skipCache && storyCache.values.length > 0) {
+  const cacheAge = storyCache.lastUpdate
+    ? Date.now() - storyCache.lastUpdate
+    : 999999
+  console.log('cache-age', cacheAge)
+
+  //1 min
+  if (!skipCache && cacheAge < 60000) {
     console.log('using cached')
     return storyCache.values
   }
