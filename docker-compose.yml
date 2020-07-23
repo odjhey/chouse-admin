@@ -1,0 +1,29 @@
+version: "3"
+services:
+  clubhouse-webui-dev:
+    container_name: clubhouse-webui-dev
+    image: odjhey/clubhouse-webui:latest
+    restart: always
+    build:
+      context: ./webui-next
+      dockerfile: Dockerfile
+    command: "node server.js"
+    ports:
+      - "3799:8080"
+    environment:
+      PORT: "8080"
+  clubhouse-service-dev:
+    container_name: clubhouse-service-dev
+    image: odjhey/clubhouse-service:latest
+    restart: always
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    command: 'node server.js'
+    ports:
+      - '3790:8080'
+    environment:
+      PORT: '8080'
+
+
+
