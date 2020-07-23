@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "next build && next export -o build",
     "start": "next start",
     "type-check": "tsc",
     "scaffold": "yarn mst-gql --format ts --roots Task http://localhost:4000/graphql"
