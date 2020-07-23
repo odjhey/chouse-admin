@@ -10,7 +10,9 @@ export function initializeStore(snapshot = null) {
   const _store =
     store ??
     RootStore.create(undefined, {
-      gqlHttpClient: createHttpClient("http://localhost:4000/graphql"),
+      gqlHttpClient: createHttpClient(
+        process.env.SERVICE_URL || "http://localhost:4000/graphql"
+      ),
     });
 
   // If your page has Next.js data fetching methods that use a Mobx store, it will
