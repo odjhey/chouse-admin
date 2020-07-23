@@ -2,7 +2,6 @@
 /* eslint-disable */
 /* tslint:disable */
 
-export * from "./BookModel"
 export * from "./TaskModel"
 export * from "./ListMetadataModel"
 export * from "./RootStore"

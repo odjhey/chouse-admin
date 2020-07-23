@@ -5,8 +5,6 @@ import { ObservableMap } from "mobx"
 import { types } from "mobx-state-tree"
 import { MSTGQLStore, configureStoreMixin, QueryOptions, withTypedRefs } from "mst-gql"
 
-import { BookModel, BookModelType } from "./BookModel"
-import { bookModelPrimitives, BookModelSelector } from "./BookModel.base"
 import { TaskModel, TaskModelType } from "./TaskModel"
 import { taskModelPrimitives, TaskModelSelector } from "./TaskModel.base"
 import { ListMetadataModel, ListMetadataModelType } from "./ListMetadataModel"
@@ -45,7 +43,7 @@ query_allTasksMeta="query_allTasksMeta"
 */
 export const RootStoreBase = withTypedRefs<Refs>()(MSTGQLStore
   .named("RootStore")
-  .extend(configureStoreMixin([['Book', () => BookModel], ['Task', () => TaskModel], ['ListMetadata', () => ListMetadataModel]], ['Task'], "js"))
+  .extend(configureStoreMixin([['Task', () => TaskModel], ['ListMetadata', () => ListMetadataModel]], ['Task'], "js"))
   .props({
     tasks: types.optional(types.map(types.late((): any => TaskModel)), {})
   })

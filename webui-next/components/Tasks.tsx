@@ -4,7 +4,7 @@ import { useQuery } from "./../src/models";
 import { observer } from "mobx-react";
 
 const TasksList = () => {
-  const { store, loading, error, setQuery } = useQuery((store) =>
+  const { store, loading, error } = useQuery((store) =>
     store.queryAllTasks({})
   );
   const columns = useMemo(
