@@ -11,7 +11,7 @@ type Task {
   story_id: String
   completed_at: String
   updated_at: String
-  #owner_ids: String
+  owners: String
   id: String
   complete: String
   created_at: String

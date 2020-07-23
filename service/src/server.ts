@@ -4,10 +4,12 @@ require('dotenv').config()
 import { ApolloServer } from 'apollo-server'
 import { resolvers, typeDefs } from './graphql'
 import { getTasksAsync } from './get-tasks'
+import { getMembersAsync } from './get-members'
 
 const context = async (_session: any) => ({
   getStories: () => {},
   getTasks: getTasksAsync,
+  getMembers: getMembersAsync,
 })
 
 const server = new ApolloServer({ typeDefs, resolvers, context })

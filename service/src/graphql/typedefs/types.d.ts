@@ -23,6 +23,7 @@ export type Task = {
   story_id?: Maybe<Scalars['String']>;
   completed_at?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['String']>;
+  owners?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   complete?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['String']>;
@@ -183,6 +184,7 @@ export type TaskResolvers<ContextType = any, ParentType extends ResolversParentT
   story_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   completed_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  owners?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   complete?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
