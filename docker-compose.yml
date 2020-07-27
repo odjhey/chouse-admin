@@ -22,6 +22,8 @@ services:
     command: 'node server.js'
     ports:
       - '3790:8080'
+    env_file:
+      - ./service/.env
     environment:
       PORT: '8080'
 
