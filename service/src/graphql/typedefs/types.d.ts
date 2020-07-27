@@ -21,6 +21,7 @@ export type Task = {
   id?: Maybe<Scalars['String']>;
   complete?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['String']>;
+  app_url?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -174,6 +175,7 @@ export type TaskResolvers<ContextType = any, ParentType extends ResolversParentT
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   complete?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  app_url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 

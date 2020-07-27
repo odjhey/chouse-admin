@@ -3,6 +3,18 @@ import Table from "./Table";
 import { useQuery } from "./../src/models";
 import { observer } from "mobx-react";
 
+//const LinkCell = ({ value, column: { getProps }, row }: any) => {
+const LinkCell = (props) => {
+  const { data, row, value } = props;
+  //console.log("data props", data[row.index], row);
+  //return getProps().fieldname
+  return (
+    <a href={data[row.index].app_url} rel="noopener noreferrer" target="_blank">
+      {value}
+    </a>
+  );
+};
+
 const TasksList = () => {
   const { store, loading, error } = useQuery((store) =>
     store.queryAllTasks({})
@@ -19,6 +31,8 @@ const TasksList = () => {
           {
             Header: "Story Id",
             accessor: "story_id",
+            Cell: LinkCell,
+            getProps: () => ({ fieldname: "app_url" }),
           },
           {
             Header: "Task Description",

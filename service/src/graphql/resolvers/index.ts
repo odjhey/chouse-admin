@@ -45,7 +45,12 @@ const resolvers = {
       // }
 
       const tasks = stories
-        .flatMap((s: any) => s.tasks)
+        .flatMap((s: any) => {
+          return s.tasks.map((t: any) => ({
+            ...t,
+            app_url: s.app_url,
+          }))
+        })
         .map((t) => {
           return {
             ...t,

@@ -38,6 +38,8 @@ const getTasksAsync = async (skipCache = false) => {
     stories.flat().map((s) => client.getStory(s.id)),
   )
 
+  console.log('stories', stories_ext)
+
   storyCache = {
     lastUpdate: Date.now(),
     values: stories_ext,

@@ -24,6 +24,7 @@ export const TaskModelBase = ModelBase
     id: types.union(types.undefined, types.null, types.string),
     complete: types.union(types.undefined, types.null, types.string),
     created_at: types.union(types.undefined, types.null, types.string),
+    app_url: types.union(types.undefined, types.null, types.string),
   })
   .views(self => ({
     get store() {
@@ -40,9 +41,10 @@ export class TaskModelSelector extends QueryBuilder {
   get id() { return this.__attr(`id`) }
   get complete() { return this.__attr(`complete`) }
   get created_at() { return this.__attr(`created_at`) }
+  get app_url() { return this.__attr(`app_url`) }
 }
 export function selectFromTask() {
   return new TaskModelSelector()
 }
 
-export const taskModelPrimitives = selectFromTask().description.story_id.completed_at.updated_at.owners.complete.created_at
+export const taskModelPrimitives = selectFromTask().description.story_id.completed_at.updated_at.owners.complete.created_at.app_url
